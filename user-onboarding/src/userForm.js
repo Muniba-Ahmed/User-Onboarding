@@ -1,12 +1,19 @@
 import React from "react";
 
-const userForm = (props) => {
+const UserForm = (props) => {
+  const { values, change, submit } = props;
+  const { username, email, password, tos } = props;
+
   const onSubmit = (evt) => {
     evt.preventDefault();
     submit();
   };
 
-  const onChange = (evt) => {};
+  const onChange = (evt) => {
+    const { name, value, checked, type } = evt.target;
+    const valueToUse = type === "checkbox" ? checked : value;
+    change(name, valueToUse);
+  };
 
   return (
     <div>
@@ -51,7 +58,7 @@ const userForm = (props) => {
             onChange={onChange}
             name="tos"
             type="checkbox"
-            checked={checked}
+            checked={tos}
           />
         </label>
         <input type="submit" value="Create a User" />
@@ -60,4 +67,4 @@ const userForm = (props) => {
   );
 };
 
-export default userForm;
+export default UserForm;
